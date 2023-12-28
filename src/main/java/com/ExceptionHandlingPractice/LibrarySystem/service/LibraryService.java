@@ -2,6 +2,7 @@ package com.ExceptionHandlingPractice.LibrarySystem.service;
 
 import com.ExceptionHandlingPractice.LibrarySystem.adapter.LibraryRepository;
 import com.ExceptionHandlingPractice.LibrarySystem.models.Book;
+import com.ExceptionHandlingPractice.LibrarySystem.models.IssueUnissueExceptionHandler;
 import com.ExceptionHandlingPractice.LibrarySystem.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,17 +45,18 @@ public class LibraryService {
         libraryRepository.addNewBooks(bookList);
     }
 
-    public void issueBookToStudent(String bookId,String studentId){
+    public void issueBookToStudent(String bookId,String studentId) throws IssueUnissueExceptionHandler {
         System.out.println("book Id : " + bookId + " student Id : " + studentId);
         if(bookId == null && studentId == null){
-            throw new IllegalArgumentException("Invalid Argument");
+            throw new IssueUnissueExceptionHandler("Invalid Argument");
         }
         libraryRepository.issueBook(bookId,studentId);
     }
 
-    public void unIssueBook(String bookId){
+    public void unIssueBook(String bookId) throws IssueUnissueExceptionHandler {
+        System.out.println("book Id -> " + bookId);
         if(bookId == null){
-            throw new IllegalArgumentException("Invalid Argument");
+            throw new IssueUnissueExceptionHandler("Invalid Argument");
         }
         libraryRepository.unIssueBook(bookId);
     }

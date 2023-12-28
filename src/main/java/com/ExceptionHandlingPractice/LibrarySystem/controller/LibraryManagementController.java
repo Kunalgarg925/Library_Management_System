@@ -1,9 +1,9 @@
 package com.ExceptionHandlingPractice.LibrarySystem.controller;
 
 import com.ExceptionHandlingPractice.LibrarySystem.models.Book;
+import com.ExceptionHandlingPractice.LibrarySystem.models.IssueUnissueExceptionHandler;
 import com.ExceptionHandlingPractice.LibrarySystem.models.Student;
 import com.ExceptionHandlingPractice.LibrarySystem.service.LibraryService;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +35,11 @@ public class LibraryManagementController {
     }
 
     @PostMapping("/issueBook")
-    public void issueBook(@RequestParam("bookId") String bookId, @RequestParam("studentId") String studentId){
+    public void issueBook(@RequestParam("bookId") String bookId, @RequestParam("studentId") String studentId) throws IssueUnissueExceptionHandler {
         libraryService.issueBookToStudent(bookId,studentId);
+    }
+    @PostMapping("/unissueBook")
+    public void unIssueBook(@RequestParam("bookId") String bookId) throws IssueUnissueExceptionHandler {
+        libraryService.unIssueBook(bookId);
     }
 }
